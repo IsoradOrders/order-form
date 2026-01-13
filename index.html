@@ -23,7 +23,7 @@
         .section-title { font-weight: bold; color: #1F4E79; margin-bottom: 15px; font-size: 16px; }
         .form-row { display: flex; align-items: center; margin-bottom: 12px; gap: 15px; flex-wrap: wrap; }
         .form-row label { font-weight: bold; min-width: 180px; }
-        .form-row input, .form-row select, .form-row textarea { padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; background-color: #FFFFD0; width: 350px; }
+        .form-row input, .form-row select, .form-row textarea { padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; background-color: #FFFFD0; width: 350px; -webkit-appearance: none; appearance: none; }
         .form-row select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: left 10px center; background-size: 16px; padding-left: 35px; }
         .form-row textarea { width: 350px; height: 50px; resize: vertical; }
         .form-row input[type="number"], .form-row input[type="time"] { width: 150px; }
@@ -34,16 +34,6 @@
         .btn-print { background-color: #1F4E79; color: white; }
         .btn-export { background-color: #217346; color: white; }
         .btn-undo { background-color: #FF9800; color: white; }
-        .btn-email { background-color: #D44638; color: white; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-overlay.show { display: flex; }
-        .modal-content { background: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%; text-align: center; }
-        .modal-title { font-size: 20px; font-weight: bold; color: #1F4E79; margin-bottom: 20px; }
-        .modal-buttons { display: flex; flex-direction: column; gap: 12px; }
-        .modal-btn { padding: 15px 20px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
-        .btn-gmail { background-color: #EA4335; color: white; }
-        .btn-outlook { background-color: #0078D4; color: white; }
-        .btn-cancel { background-color: #6c757d; color: white; margin-top: 10px; }
         #orderContainer { background-color: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .order-logo-banner { background-color: #1F4E79; padding: 15px; border-radius: 8px 8px 0 0; text-align: center; }
         .order-logo-main { font-size: 32px; font-weight: bold; color: white; letter-spacing: 5px; margin: 0; }
@@ -72,7 +62,7 @@
             button { width: 100%; }
         }
         @media print {
-            .dashboard, .buttons, .logo-banner, .header, .modal-overlay { display: none !important; }
+            .dashboard, .buttons, .logo-banner, .header { display: none !important; }
             #orderContainer { box-shadow: none; padding: 0; }
         }
     </style>
@@ -94,36 +84,8 @@
             <div class="form-section">
                 <div class="section-title">פרטי הזמנה</div>
                 <div class="form-row">
-                    <label>שם המוסד:</label>
-                    <select id="institution">
-                        <option value="">-- בחר מוסד --</option>
-                        <option value="מרכז רפואי הדסה עין-כרם">מרכז רפואי הדסה עין-כרם</option>
-                        <option value="מ.א.ר ירושלים">מ.א.ר ירושלים</option>
-                        <option value="מרכז רפואי שערי צדק">מרכז רפואי שערי צדק</option>
-                        <option value="מרכז רפואי אסף הרופא">מרכז רפואי אסף הרופא</option>
-                        <option value="המרכז רפואי שיבא">המרכז רפואי שיבא</option>
-                        <option value="מרכז רפואי וולפסון">מרכז רפואי וולפסון</option>
-                        <option value="מרכז שניידר לרפואת ילדים">מרכז שניידר לרפואת ילדים</option>
-                        <option value="בי״ח בילינסון">בי״ח בילינסון</option>
-                        <option value="מרכז רפואי איכילוב">מרכז רפואי איכילוב</option>
-                        <option value="אסותא ראשל״צ">אסותא ראשל״צ</option>
-                        <option value="אסותא רמת החייל">אסותא רמת החייל</option>
-                        <option value="אסותא אשדוד">אסותא אשדוד</option>
-                        <option value="אסותא חיפה">אסותא חיפה</option>
-                        <option value="אסותא באר שבע">אסותא באר שבע</option>
-                        <option value="מרכז רפואי רמב״ם">מרכז רפואי רמב״ם</option>
-                        <option value="המרכז הרפואי זיו">המרכז הרפואי זיו</option>
-                        <option value="המרכז הרפואי הלל יפה">המרכז הרפואי הלל יפה</option>
-                        <option value="בית חולים נהריה">בית חולים נהריה</option>
-                        <option value="מרכז רפואי כרמל">מרכז רפואי כרמל</option>
-                        <option value="מרכז רפואי מאיר">מרכז רפואי מאיר</option>
-                        <option value="מרכז רפואי העמק">מרכז רפואי העמק</option>
-                        <option value="בית חולים ברזילי">בית חולים ברזילי</option>
-                        <option value="מרכז רפואי קפלן">מרכז רפואי קפלן</option>
-                        <option value="מרכז רפואי סורוקה">מרכז רפואי סורוקה</option>
-                        <option value="מ.א.ר באר שבע">מ.א.ר באר שבע</option>
-                        <option value="מ.א.ר נצרת">מ.א.ר נצרת</option>
-                    </select>
+                    <label>שם המכון:</label>
+                    <input type="text" id="institution" placeholder="הזן שם מכון">
                 </div>
                 <div class="form-row">
                     <label>תאריך הזמנה:</label>
@@ -133,12 +95,20 @@
                     <label>שם מבצע ההזמנה:</label>
                     <input type="text" id="ordererName" placeholder="הזן שם" style="width: 250px;">
                 </div>
+                <div class="form-row">
+                    <label>סוג הזמנה:</label>
+                    <select id="orderType" style="-webkit-appearance: none; appearance: none;">
+                        <option value="הזמנה מקורית">הזמנה מקורית</option>
+                        <option value="תוספת להזמנה">תוספת להזמנה</option>
+                        <option value="ביטול מנות">ביטול מנות</option>
+                    </select>
+                </div>
             </div>
             <div class="form-section">
                 <div class="section-title">פרטי תכשיר</div>
                 <div class="form-row">
                     <label>בחר תכשיר:</label>
-                    <select id="product">
+                    <select id="product" style="-webkit-appearance: none; appearance: none;">
                         <option value="">-- בחר תכשיר --</option>
                         <option value="MDP">MDP</option>
                         <option value="DMSA">DMSA</option>
@@ -150,31 +120,32 @@
                         <option value="Tl-201">Tl-201</option>
                         <option value="MAG-3">MAG-3</option>
                         <option value="DTPA">DTPA</option>
-                        <option value="Filter S.C">Filter S.C</option>
+                        <option value="Filtered S.C">Filtered S.C</option>
                         <option value="MAA">MAA</option>
                         <option value="FDG">FDG</option>
+                        <option value="FDOPA">FDOPA</option>
                         <option value="Ga-68 Dota Tate">Ga-68 Dota Tate</option>
                         <option value="Ga-68 PSMA">Ga-68 PSMA</option>
                         <option value="FPSMA">FPSMA</option>
-                        <option value="Tc-99 במזרק">Tc-99 במזרק</option>
-                        <option value="Tc-99 בבקבוקון">Tc-99 בבקבוקון</option>
+                        <option value="Tc-99m במזרק">Tc-99m במזרק</option>
+                        <option value="Tc-99m בבקבוקון">Tc-99m בבקבוקון</option>
                     </select>
                 </div>
                 <div class="form-row">
                     <label>שעת כיול המנה הראשונה:</label>
-                    <input type="time" id="startTime" value="08:00">
+                    <input type="time" id="startTime" placeholder="">
                 </div>
                 <div class="form-row">
                     <label>מספר מנות:</label>
-                    <input type="number" id="numDoses" min="1" max="50" value="5">
+                    <input type="number" id="numDoses" min="1" max="50" placeholder="">
                 </div>
                 <div class="form-row">
                     <label>אקטיביות (mCi):</label>
-                    <input type="number" id="activity" min="0.1" max="100" step="0.1" value="25">
+                    <input type="number" id="activity" min="0.1" max="100" step="0.1" placeholder="">
                 </div>
                 <div class="form-row">
                     <label>מרווח זמן (דקות):</label>
-                    <input type="number" id="interval" min="5" max="120" value="30">
+                    <input type="number" id="interval" min="5" max="120" placeholder="">
                 </div>
                 <div class="form-row">
                     <label>הערה:</label>
@@ -187,7 +158,6 @@
                 <button type="button" class="btn-clear" id="btnClear">🗑️ נקה הזמנה</button>
                 <button type="button" class="btn-print" id="btnPrint">🖨️ הדפס</button>
                 <button type="button" class="btn-export" id="btnExport">📊 ייצא ל-Excel</button>
-                <button type="button" class="btn-email" id="btnEmail">📧 שלח במייל</button>
             </div>
         </div>
         <div id="orderContainer">
@@ -200,9 +170,10 @@
                 <div class="order-header-left">📞 08-9434424 | ✉️ radiopharmacy@isorad.co.il</div>
             </div>
             <div class="order-info">
-                <span>מוסד: <span id="displayInstitution">---</span></span>
+                <span>מכון: <span id="displayInstitution">---</span></span>
                 <span>תאריך: <span id="displayDate">---</span></span>
                 <span>מזמין: <span id="displayOrderer">---</span></span>
+                <span>סוג: <span id="displayOrderType">---</span></span>
                 <span>שעת הפקה: <span id="displayTimestamp">---</span></span>
             </div>
             <div id="orderContent">
@@ -210,20 +181,48 @@
             </div>
         </div>
     </div>
-    <div class="modal-overlay" id="emailModal">
-        <div class="modal-content">
-            <div class="modal-title">בחר אפליקציית מייל</div>
-            <div class="modal-buttons">
-                <button type="button" class="modal-btn btn-gmail" id="btnGmail">📧 Gmail</button>
-                <button type="button" class="modal-btn btn-outlook" id="btnOutlook">📧 Outlook</button>
-                <button type="button" class="modal-btn btn-cancel" id="btnCancel">ביטול</button>
-            </div>
-        </div>
-    </div>
+
     <script>
     (function() {
         var orderData = {};
         var orderHistory = [];
+        
+        function pad2(n) {
+            n = parseInt(n, 10);
+            if (n < 10) return '0' + n;
+            return '' + n;
+        }
+        
+        function setTomorrowDate() {
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var year = tomorrow.getFullYear();
+            var month = pad2(tomorrow.getMonth() + 1);
+            var day = pad2(tomorrow.getDate());
+            document.getElementById('orderDate').value = year + '-' + month + '-' + day;
+        }
+        
+        function getCurrentTime() {
+            var now = new Date();
+            return pad2(now.getHours()) + ':' + pad2(now.getMinutes());
+        }
+        
+        function formatDate(dateStr) {
+            if (!dateStr) return '---';
+            var parts = dateStr.split('-');
+            if (parts.length !== 3) return '---';
+            return parts[2] + '/' + parts[1] + '/' + parts[0];
+        }
+        
+        function getKeys(obj) {
+            var keys = [];
+            for (var k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    keys.push(k);
+                }
+            }
+            return keys;
+        }
         
         function saveHistory() {
             var copy = {};
@@ -231,7 +230,12 @@
                 if (orderData.hasOwnProperty(k)) {
                     copy[k] = [];
                     for (var i = 0; i < orderData[k].length; i++) {
-                        copy[k].push({ time: orderData[k][i].time, activity: orderData[k][i].activity, qty: orderData[k][i].qty, notes: orderData[k][i].notes });
+                        copy[k].push({
+                            time: orderData[k][i].time,
+                            activity: orderData[k][i].activity,
+                            qty: orderData[k][i].qty,
+                            notes: orderData[k][i].notes
+                        });
                     }
                 }
             }
@@ -240,32 +244,64 @@
         }
         
         function undo() {
-            if (orderHistory.length === 0) { alert('אין פעולות לביטול'); return; }
+            if (orderHistory.length === 0) {
+                alert('אין פעולות לביטול');
+                return;
+            }
             orderData = orderHistory.pop();
             renderOrder();
         }
         
-        function pad2(n) { n = parseInt(n, 10); return (n < 10 ? '0' : '') + n; }
-        function setTomorrowDate() {
-            var t = new Date(); t.setDate(t.getDate() + 1);
-            document.getElementById('orderDate').value = t.getFullYear() + '-' + pad2(t.getMonth() + 1) + '-' + pad2(t.getDate());
-        }
-        function getCurrentTime() { var n = new Date(); return pad2(n.getHours()) + ':' + pad2(n.getMinutes()); }
-        function formatDate(s) { if (!s) return '---'; var p = s.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
-        function getKeys(o) { var k = []; for (var x in o) { if (o.hasOwnProperty(x)) k.push(x); } return k; }
-        
         function addToOrder() {
             var inst = document.getElementById('institution').value;
             var prod = document.getElementById('product').value;
-            if (!prod) { alert('נא לבחור תכשיר'); return; }
-            if (!inst) { alert('נא לבחור מוסד'); return; }
-            var dt = document.getElementById('orderDate').value;
-            var nm = document.getElementById('ordererName').value;
-            var tm = document.getElementById('startTime').value || '08:00';
-            var num = parseInt(document.getElementById('numDoses').value, 10) || 5;
-            var act = parseFloat(document.getElementById('activity').value) || 25;
-            var intv = parseInt(document.getElementById('interval').value, 10) || 30;
+            var startTime = document.getElementById('startTime').value;
+            var numDoses = document.getElementById('numDoses').value;
+            var activity = document.getElementById('activity').value;
+            var interval = document.getElementById('interval').value;
+            var ordererName = document.getElementById('ordererName').value;
+            var orderDate = document.getElementById('orderDate').value;
+            
+            if (!inst) {
+                alert('נא להזין שם מכון');
+                return;
+            }
+            if (!orderDate) {
+                alert('נא להזין תאריך הזמנה');
+                return;
+            }
+            if (!ordererName) {
+                alert('נא להזין שם מבצע ההזמנה');
+                return;
+            }
+            if (!prod) {
+                alert('נא לבחור תכשיר');
+                return;
+            }
+            if (!startTime) {
+                alert('נא להזין שעת כיול');
+                return;
+            }
+            if (!numDoses || numDoses < 1) {
+                alert('נא להזין מספר מנות');
+                return;
+            }
+            if (!activity || activity <= 0) {
+                alert('נא להזין אקטיביות');
+                return;
+            }
+            if (!interval || interval < 1) {
+                alert('נא להזין מרווח זמן');
+                return;
+            }
+            
+            var dt = orderDate;
+            var nm = ordererName;
+            var orderType = document.getElementById('orderType').value;
             var notes = document.getElementById('notes').value;
+            var num = parseInt(numDoses, 10);
+            var act = parseFloat(activity);
+            var intv = parseInt(interval, 10);
             
             // Check Sestamibi Stress/Rest balance
             if (prod === 'Sestamibi Stress' || prod === 'Sestamibi Rest') {
@@ -274,192 +310,277 @@
                 var otherCount = orderData[other] ? orderData[other].length : 0;
                 var newTotal = currentCount + num;
                 if (otherCount > 0 && newTotal !== otherCount) {
-                    var msg = 'שגיאה: כמות ' + prod + ' (' + newTotal + ') לא תואמת לכמות ' + other + ' (' + otherCount + ').\n\n';
-                    msg += 'הכמויות חייבות להיות שוות.\n';
-                    msg += 'אם הכמויות לא שוות, יש להשתמש ב-Sestamibi Parathyroid.';
-                    alert(msg);
+                    alert('שגיאה: כמות ' + prod + ' (' + newTotal + ') לא תואמת לכמות ' + other + ' (' + otherCount + ').\n\nהכמויות חייבות להיות שוות.\nאם הכמויות לא שוות, יש להשתמש ב-Sestamibi Parathyroid.');
                     return;
                 }
             }
             
             saveHistory();
+            
+            // Lock order type after first item
+            document.getElementById('orderType').disabled = true;
+            
             document.getElementById('displayInstitution').innerHTML = inst;
             document.getElementById('displayDate').innerHTML = formatDate(dt);
             document.getElementById('displayOrderer').innerHTML = nm || '---';
-            var parts = tm.split(':');
-            var mins = (parseInt(parts[0],10)||8)*60 + (parseInt(parts[1],10)||0);
-            if (!orderData[prod]) orderData[prod] = [];
-            for (var i = 0; i < num; i++) {
-                var h = Math.floor(mins/60)%24, m = mins%60;
-                orderData[prod].push({ time: pad2(h)+':'+pad2(m), activity: act, qty: 1, notes: notes||'' });
-                mins += intv;
+            document.getElementById('displayOrderType').innerHTML = orderType;
+            
+            var timeParts = startTime.split(':');
+            var hours = parseInt(timeParts[0], 10) || 8;
+            var minutes = parseInt(timeParts[1], 10) || 0;
+            var currentMinutes = hours * 60 + minutes;
+            
+            if (!orderData[prod]) {
+                orderData[prod] = [];
             }
+            
+            for (var i = 0; i < num; i++) {
+                var h = Math.floor(currentMinutes / 60) % 24;
+                var m = currentMinutes % 60;
+                var timeStr = pad2(h) + ':' + pad2(m);
+                
+                orderData[prod].push({
+                    time: timeStr,
+                    activity: act,
+                    qty: 1,
+                    notes: notes || ''
+                });
+                currentMinutes = currentMinutes + intv;
+            }
+            
             renderOrder();
             document.getElementById('product').value = '';
             document.getElementById('notes').value = '';
         }
         
         function renderOrder() {
-            var c = document.getElementById('orderContent');
-            var prods = getKeys(orderData);
-            if (prods.length === 0) { c.innerHTML = '<div class="empty-message">לא נוספו תכשירים להזמנה</div>'; return; }
+            var container = document.getElementById('orderContent');
+            var products = getKeys(orderData);
+            
+            if (products.length === 0) {
+                container.innerHTML = '<div class="empty-message">לא נוספו תכשירים להזמנה</div>';
+                return;
+            }
+            
             var html = '';
-            for (var p = 0; p < prods.length; p++) {
-                var prod = prods[p], doses = orderData[prod], total = doses.length;
-                html += '<div class="product-section"><div class="product-header">' + prod + '</div>';
-                html += '<table><thead><tr><th style="width:15%">שעת כיול</th><th style="width:15%">אקטיביות (mCi)</th><th style="width:10%">כמות</th><th style="width:60%">הערות</th></tr></thead><tbody>';
+            for (var p = 0; p < products.length; p++) {
+                var product = products[p];
+                var doses = orderData[product];
+                var totalQty = doses.length;
+                
+                html += '<div class="product-section">';
+                html += '<div class="product-header">' + product + '</div>';
+                html += '<table><thead><tr>';
+                html += '<th style="width:15%">שעת כיול</th>';
+                html += '<th style="width:15%">אקטיביות (mCi)</th>';
+                html += '<th style="width:10%">כמות</th>';
+                html += '<th style="width:60%">הערות</th>';
+                html += '</tr></thead><tbody>';
+                
                 for (var d = 0; d < doses.length; d++) {
                     var dose = doses[d];
-                    html += '<tr><td>' + dose.time + '</td><td>' + dose.activity + '</td><td>' + dose.qty + '</td><td class="notes-cell">' + dose.notes + '</td></tr>';
+                    html += '<tr>';
+                    html += '<td>' + dose.time + '</td>';
+                    html += '<td>' + dose.activity + '</td>';
+                    html += '<td>' + dose.qty + '</td>';
+                    html += '<td class="notes-cell">' + dose.notes + '</td>';
+                    html += '</tr>';
                 }
-                html += '<tr class="total-row"><td colspan="2" style="text-align:right;font-weight:bold;">סה״כ מנות:</td><td style="font-weight:bold;">' + total + '</td><td></td></tr>';
+                
+                html += '<tr class="total-row">';
+                html += '<td colspan="2" style="text-align: right; font-weight: bold;">סה״כ מנות:</td>';
+                html += '<td style="font-weight: bold;">' + totalQty + '</td>';
+                html += '<td></td>';
+                html += '</tr>';
                 html += '</tbody></table></div>';
             }
-            c.innerHTML = html;
+            
+            container.innerHTML = html;
         }
         
         function clearOrder() {
-            if (confirm('האם אתה בטוח?')) {
+            if (confirm('האם אתה בטוח שברצונך לנקות את ההזמנה?')) {
                 orderData = {};
+                orderHistory = [];
+                document.getElementById('orderType').disabled = false;
                 document.getElementById('displayInstitution').innerHTML = '---';
                 document.getElementById('displayDate').innerHTML = '---';
                 document.getElementById('displayOrderer').innerHTML = '---';
+                document.getElementById('displayOrderType').innerHTML = '---';
                 document.getElementById('displayTimestamp').innerHTML = '---';
                 renderOrder();
             }
         }
         
         function printOrder() {
-            if (getKeys(orderData).length === 0) { alert('אין נתונים להדפסה'); return; }
+            var products = getKeys(orderData);
+            if (products.length === 0) {
+                alert('אין נתונים להדפסה');
+                return;
+            }
             document.getElementById('displayTimestamp').innerHTML = getCurrentTime();
             setTimeout(function() { window.print(); }, 100);
         }
         
-        function getEmailData() {
-            var inst = document.getElementById('displayInstitution').innerHTML;
-            var dt = document.getElementById('displayDate').innerHTML;
-            var ord = document.getElementById('displayOrderer').innerHTML;
-            var subj = 'הזמנת מנות - ' + inst + ' - ' + dt;
-            var body = 'שלום רב,\n\nמצורף קובץ הזמנת מנות.\n\n* נא לצרף את קובץ האקסל *\n\nבברכה,\n' + ord;
-            return { subject: subj, body: body };
-        }
-        
-        function showEmailModal() {
-            if (getKeys(orderData).length === 0) { alert('אין נתונים לשליחה'); return; }
-            document.getElementById('emailModal').classList.add('show');
-        }
-        function hideEmailModal() { document.getElementById('emailModal').classList.remove('show'); }
-        
-        function sendViaGmail() {
-            var d = getEmailData();
-            window.open('https://mail.google.com/mail/?view=cm&fs=1&to=radiopharmacy@isorad.co.il&su=' + encodeURIComponent(d.subject) + '&body=' + encodeURIComponent(d.body), '_blank');
-            hideEmailModal();
-        }
-        function sendViaOutlook() {
-            var d = getEmailData();
-            window.open('https://outlook.live.com/mail/0/deeplink/compose?to=radiopharmacy@isorad.co.il&subject=' + encodeURIComponent(d.subject) + '&body=' + encodeURIComponent(d.body), '_blank');
-            hideEmailModal();
-        }
-        
         function exportToExcel() {
             var prods = getKeys(orderData);
-            if (prods.length === 0) { alert('אין נתונים לייצוא'); return; }
+            if (prods.length === 0) {
+                alert('אין נתונים לייצוא');
+                return;
+            }
+            
             var inst = document.getElementById('displayInstitution').innerHTML;
             var dt = document.getElementById('displayDate').innerHTML;
             var ord = document.getElementById('displayOrderer').innerHTML;
+            var orderType = document.getElementById('displayOrderType').innerHTML;
             var ts = getCurrentTime();
             document.getElementById('displayTimestamp').innerHTML = ts;
+            
             var wb = new ExcelJS.Workbook();
             var ws = wb.addWorksheet('הזמנה', { views: [{ rightToLeft: true }] });
-            ws.columns = [{ width: 18 }, { width: 20 }, { width: 12 }, { width: 50 }];
+            
+            ws.columns = [
+                { width: 18 },
+                { width: 20 },
+                { width: 12 },
+                { width: 50 }
+            ];
+            
             ws.mergeCells('A1:D1');
-            var t = ws.getCell('A1'); t.value = 'ISORAD - Radiopharmacy';
-            t.font = { bold: true, size: 20, color: { argb: 'FFFFFFFF' } };
-            t.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E79' } };
-            t.alignment = { horizontal: 'center', vertical: 'middle' };
+            var title = ws.getCell('A1');
+            title.value = 'ISORAD - Radiopharmacy';
+            title.font = { bold: true, size: 20, color: { argb: 'FFFFFFFF' } };
+            title.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E79' } };
+            title.alignment = { horizontal: 'center', vertical: 'middle' };
             ws.getRow(1).height = 32;
+            
             ws.mergeCells('A2:D2');
-            var s = ws.getCell('A2'); s.value = 'טופס הזמנה - בית מרקחת גרעיני';
-            s.font = { bold: true, size: 14, color: { argb: 'FFFFFFFF' } };
-            s.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF2E75B6' } };
-            s.alignment = { horizontal: 'center', vertical: 'middle' };
+            var subtitle = ws.getCell('A2');
+            subtitle.value = orderType + ' - בית מרקחת גרעיני';
+            subtitle.font = { bold: true, size: 14, color: { argb: 'FFFFFFFF' } };
+            
+            // Set color based on order type
+            var subtitleColor = 'FF2E75B6'; // Default blue for הזמנה מקורית
+            if (orderType === 'תוספת להזמנה') {
+                subtitleColor = 'FF28A745'; // Green
+            } else if (orderType === 'ביטול מנות') {
+                subtitleColor = 'FFDC3545'; // Red
+            }
+            subtitle.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: subtitleColor } };
+            subtitle.alignment = { horizontal: 'center', vertical: 'middle' };
             ws.getRow(2).height = 24;
+            
             ws.mergeCells('A3:D3');
-            var i3 = ws.getCell('A3'); i3.value = 'מוסד: ' + inst;
-            i3.font = { bold: true, size: 11 }; i3.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
-            i3.alignment = { horizontal: 'center', vertical: 'middle' }; ws.getRow(3).height = 22;
+            var info = ws.getCell('A3');
+            info.value = 'מכון: ' + inst;
+            info.font = { bold: true, size: 11 };
+            info.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
+            info.alignment = { horizontal: 'center', vertical: 'middle' };
+            ws.getRow(3).height = 22;
+            
             ws.mergeCells('A4:D4');
-            var i4 = ws.getCell('A4'); i4.value = 'תאריך: ' + dt + '  |  מזמין: ' + ord + '  |  שעת הפקה: ' + ts;
-            i4.font = { bold: true, size: 11 }; i4.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
-            i4.alignment = { horizontal: 'center', vertical: 'middle' }; ws.getRow(4).height = 22;
+            var info2 = ws.getCell('A4');
+            info2.value = 'תאריך: ' + dt + '  |  מזמין: ' + ord + '  |  שעת הפקה: ' + ts;
+            info2.font = { bold: true, size: 11 };
+            info2.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
+            info2.alignment = { horizontal: 'center', vertical: 'middle' };
+            ws.getRow(4).height = 22;
+            
             ws.mergeCells('A5:D5');
-            var c5 = ws.getCell('A5'); c5.value = 'טלפון: 08-9434424  |  מייל: radiopharmacy@isorad.co.il';
-            c5.font = { size: 10 }; c5.alignment = { horizontal: 'center' };
+            var contact = ws.getCell('A5');
+            contact.value = 'טלפון: 08-9434424  |  מייל: radiopharmacy@isorad.co.il';
+            contact.font = { size: 10 };
+            contact.alignment = { horizontal: 'center' };
+            
             var row = 7;
+            
             for (var p = 0; p < prods.length; p++) {
-                var prod = prods[p], doses = orderData[prod], totalQty = doses.length;
+                var product = prods[p];
+                var doses = orderData[product];
+                var totalQty = doses.length;
+                
                 ws.mergeCells('A' + row + ':D' + row);
-                var pc = ws.getCell('A' + row); pc.value = prod;
-                pc.font = { bold: true, size: 13, color: { argb: 'FFFFFFFF' } };
-                pc.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E79' } };
-                pc.alignment = { horizontal: 'center', vertical: 'middle' };
-                ws.getRow(row).height = 24; row++;
-                var hdrs = ['שעת כיול', 'אקטיביות (mCi)', 'כמות', 'הערות'];
-                for (var h = 0; h < hdrs.length; h++) {
-                    var hc = ws.getCell(row, h + 1); hc.value = hdrs[h]; hc.font = { bold: true };
-                    hc.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
-                    hc.alignment = { horizontal: 'center' };
-                    hc.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                var prodCell = ws.getCell('A' + row);
+                prodCell.value = product;
+                prodCell.font = { bold: true, size: 13, color: { argb: 'FFFFFFFF' } };
+                prodCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF1F4E79' } };
+                prodCell.alignment = { horizontal: 'center', vertical: 'middle' };
+                ws.getRow(row).height = 24;
+                row++;
+                
+                var headers = ['שעת כיול', 'אקטיביות (mCi)', 'כמות', 'הערות'];
+                for (var h = 0; h < headers.length; h++) {
+                    var hCell = ws.getCell(row, h + 1);
+                    hCell.value = headers[h];
+                    hCell.font = { bold: true };
+                    hCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD9E2F3' } };
+                    hCell.alignment = { horizontal: 'center' };
+                    hCell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
                 }
                 row++;
+                
                 for (var d = 0; d < doses.length; d++) {
                     var dose = doses[d];
                     ws.getCell(row, 1).value = dose.time;
                     ws.getCell(row, 2).value = dose.activity;
                     ws.getCell(row, 3).value = dose.qty;
                     ws.getCell(row, 4).value = dose.notes || '';
+                    
                     for (var x = 1; x <= 4; x++) {
-                        var dc = ws.getCell(row, x);
-                        dc.alignment = { horizontal: x === 4 ? 'right' : 'center', wrapText: true };
-                        dc.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-                        if (d % 2 === 1) dc.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF5F5F5' } };
+                        var dCell = ws.getCell(row, x);
+                        dCell.alignment = { horizontal: x === 4 ? 'right' : 'center', wrapText: true };
+                        dCell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                        if (d % 2 === 1) {
+                            dCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF5F5F5' } };
+                        }
                     }
                     row++;
                 }
+                
                 ws.mergeCells('A' + row + ':B' + row);
-                var tlc = ws.getCell('A' + row); tlc.value = 'סה״כ מנות:'; tlc.font = { bold: true };
-                tlc.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
-                tlc.alignment = { horizontal: 'right' };
-                tlc.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-                var tqc = ws.getCell(row, 3); tqc.value = totalQty; tqc.font = { bold: true };
-                tqc.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
-                tqc.alignment = { horizontal: 'center' };
-                tqc.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
-                var ec = ws.getCell(row, 4);
-                ec.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
-                ec.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                var totalLabelCell = ws.getCell('A' + row);
+                totalLabelCell.value = 'סה״כ מנות:';
+                totalLabelCell.font = { bold: true };
+                totalLabelCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
+                totalLabelCell.alignment = { horizontal: 'right' };
+                totalLabelCell.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                
+                var totalQtyCell = ws.getCell(row, 3);
+                totalQtyCell.value = totalQty;
+                totalQtyCell.font = { bold: true };
+                totalQtyCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
+                totalQtyCell.alignment = { horizontal: 'center' };
+                totalQtyCell.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                
+                var emptyCell = ws.getCell(row, 4);
+                emptyCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFFF3CD' } };
+                emptyCell.border = { top: { style: 'medium' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
+                
                 row += 2;
             }
-            wb.xlsx.writeBuffer().then(function(buf) {
-                var blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                var lnk = document.createElement('a');
-                lnk.href = URL.createObjectURL(blob);
-                lnk.download = 'הזמנה_' + (inst || 'order').substring(0, 30) + '_' + (dt || '').replace(/\//g, '-') + '.xlsx';
-                document.body.appendChild(lnk); lnk.click(); document.body.removeChild(lnk);
+            
+            wb.xlsx.writeBuffer().then(function(buffer) {
+                var blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                var safeInst = (inst || 'order').substring(0, 30);
+                var safeDate = (dt || '').replace(/\//g, '-');
+                link.download = orderType + '_' + safeInst + '_' + safeDate + '.xlsx';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             });
         }
         
+        // Initialize
         setTomorrowDate();
+        
+        // Event handlers
         document.getElementById('btnAdd').onclick = addToOrder;
         document.getElementById('btnUndo').onclick = undo;
         document.getElementById('btnClear').onclick = clearOrder;
         document.getElementById('btnPrint').onclick = printOrder;
         document.getElementById('btnExport').onclick = exportToExcel;
-        document.getElementById('btnEmail').onclick = showEmailModal;
-        document.getElementById('btnGmail').onclick = sendViaGmail;
-        document.getElementById('btnOutlook').onclick = sendViaOutlook;
-        document.getElementById('btnCancel').onclick = hideEmailModal;
-        document.getElementById('emailModal').onclick = function(e) { if (e.target.id === 'emailModal') hideEmailModal(); };
     })();
     </script>
 </body>
