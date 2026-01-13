@@ -21,6 +21,8 @@
         .form-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
         .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .section-title { font-weight: bold; color: #1F4E79; margin-bottom: 15px; font-size: 16px; }
+        .form-section.disabled { opacity: 0.5; pointer-events: none; }
+        .form-section.disabled .section-title::after { content: ' (יש למלא קודם את פרטי ההזמנה)'; color: #C00000; font-size: 12px; }
         .form-row { display: flex; align-items: center; margin-bottom: 12px; gap: 15px; flex-wrap: wrap; }
         .form-row label { font-weight: bold; min-width: 180px; }
         .form-row input, .form-row select, .form-row textarea { padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; background-color: #FFFFD0; width: 350px; -webkit-appearance: none; appearance: none; }
@@ -104,7 +106,7 @@
                     </select>
                 </div>
             </div>
-            <div class="form-section">
+            <div class="form-section disabled" id="productSection">
                 <div class="section-title">פרטי תכשיר</div>
                 <div class="form-row">
                     <label>בחר תכשיר:</label>
@@ -252,6 +254,19 @@
             renderOrder();
         }
         
+        function checkOrderDetailsComplete() {
+            var inst = document.getElementById('institution').value;
+            var orderDate = document.getElementById('orderDate').value;
+            var ordererName = document.getElementById('ordererName').value;
+            var productSection = document.getElementById('productSection');
+            
+            if (inst && orderDate && ordererName) {
+                productSection.classList.remove('disabled');
+            } else {
+                productSection.classList.add('disabled');
+            }
+        }
+        
         function addToOrder() {
             var inst = document.getElementById('institution').value;
             var prod = document.getElementById('product').value;
@@ -319,6 +334,9 @@
             
             // Lock order type after first item
             document.getElementById('orderType').disabled = true;
+            document.getElementById('institution').disabled = true;
+            document.getElementById('orderDate').disabled = true;
+            document.getElementById('ordererName').disabled = true;
             
             document.getElementById('displayInstitution').innerHTML = inst;
             document.getElementById('displayDate').innerHTML = formatDate(dt);
@@ -421,6 +439,9 @@
                 orderData = {};
                 orderHistory = [];
                 document.getElementById('orderType').disabled = false;
+                document.getElementById('institution').disabled = false;
+                document.getElementById('orderDate').disabled = false;
+                document.getElementById('ordererName').disabled = false;
                 document.getElementById('displayInstitution').innerHTML = '---';
                 document.getElementById('displayDate').innerHTML = '---';
                 document.getElementById('displayOrderer').innerHTML = '---';
@@ -615,6 +636,14 @@
         
         // Initialize
         setTomorrowDate();
+        
+        // Check order details on input change
+        document.getElementById('institution').oninput = checkOrderDetailsComplete;
+        document.getElementById('orderDate').onchange = checkOrderDetailsComplete;
+        document.getElementById('ordererName').oninput = checkOrderDetailsComplete;
+        
+        // Initial check
+        checkOrderDetailsComplete();
         
         // Change activity step based on product selection
         document.getElementById('product').onchange = function() {
